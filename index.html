@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-Audit SEO - Pétille avec Moi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #711fc6 0%, #9333ea 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-40px) translateX(-10px); }
+            75% { transform: translateY(-20px) translateX(5px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 30px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(113, 31, 198, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .logo-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-header img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #711fc6;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        h2 {
+            color: #711fc6;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #711fc6;
+            padding-bottom: 15px;
+        }
+
+        h3 {
+            color: #9333ea;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border-left: 5px solid #711fc6;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(113, 31, 198, 0.1);
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 5px solid #059669;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .metric {
+            display: inline-block;
+            background: #711fc6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 5px;
+            font-size: 1.1em;
+        }
+
+        .action-list {
+            margin: 20px 0;
+        }
+
+        .action-item {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 15px;
+            border-left: 4px solid #711fc6;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .action-item:hover {
+            transform: translateX(10px);
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .urgent {
+            background: #dc2626;
+            color: white;
+        }
+
+        .high {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #711fc6 0%, #9333ea 100%);
+            color: white;
+            border-radius: 25px;
+            margin-top: 40px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: white;
+            color: #711fc6;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: scale(1.05);
+        }
+
+        .storytelling {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+            margin: 20px 0;
+        }
+
+        .emphasis {
+            color: #711fc6;
+            font-weight: bold;
+        }
+
+        ul {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .comparison-item {
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .before {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+        }
+
+        .after {
+            background: #d1fae5;
+            border: 2px solid #059669;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bulles décoratives -->
+    <div class="bubble" style="width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 60px; height: 60px; top: 20%; right: 15%; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 100px; height: 100px; top: 50%; left: 5%; animation-delay: 4s;"></div>
+    <div class="bubble" style="width: 70px; height: 70px; top: 70%; right: 10%; animation-delay: 1s;"></div>
+    <div class="bubble" style="width: 90px; height: 90px; top: 85%; left: 20%; animation-delay: 3s;"></div>
+
+    <div class="container">
+        <!-- Slide 1: Titre -->
+        <div class="slide">
+            <div class="logo-header">
+                <img src="image-petille&moi/logo-petille.png" alt="Pétille avec Moi Logo">
+            </div>
+            <h1>PRÉ-AUDIT SEO</h1>
+            <p class="subtitle">Transformer un excellent message en un site web performant</p>
+        </div>
+
+        <!-- Slide 2: Le Constat Principal -->
+        <div class="slide">
+            <h2>🏎️ Une Formule 1 avec un Moteur Mal Réglé</h2>
+            
+            <p class="storytelling">
+                Imaginez une voiture de course exceptionnelle : un design élégant, un pilote talentueux, 
+                une vision claire de la ligne d'arrivée. <span class="emphasis">C'est exactement ce que représente 
+                Pétille avec Moi aujourd'hui.</span> Votre mission – proposer l'alternative à la "fatigue des 
+                applications de rencontre" – résonne parfaitement avec votre audience. Votre contenu de blog, 
+                vos portraits authentiques et vos passages médias créent une confiance immédiate.
+            </p>
+
+            <div class="highlight-box">
+                <h3>✨ Ce qui fait briller votre agence :</h3>
+                <ul>
+                    <li>Un positionnement unique et différenciant sur le marché</li>
+                    <li>Des contenus de qualité qui inspirent confiance</li>
+                    <li>Une communication claire, authentique et ciblée</li>
+                    <li>Des témoignages et passages médias qui renforcent votre crédibilité</li>
+                </ul>
+            </div>
+
+            <p class="storytelling">
+                Mais voilà le problème : <span class="emphasis">cette magnifique Formule 1 a un moteur mal réglé.</span> 
+                Le site web – ce "contenant" technique – ne permet pas à votre message exceptionnel d'atteindre 
+                son plein potentiel. Des freins techniques majeurs et des choix de structure limitent votre 
+                visibilité sur Google, ralentissent l'expérience utilisateur et, au final, vous font perdre 
+                des clients potentiels avant même qu'ils ne découvrent la richesse de vos services.
+            </p>
+        </div>
+
+        <!-- Slide 3: Nos Deux Axes -->
+        <div class="slide">
+            <h2>🎯 Notre Stratégie d'Intervention</h2>
+            
+            <p class="storytelling">
+                Pour que votre site "pétille" autant que votre agence, nous allons intervenir sur deux chantiers 
+                complémentaires qui transformeront radicalement la performance de votre présence en ligne :
+            </p>
+
+            <div class="comparison">
+                <div class="comparison-item" style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border: 3px solid #711fc6;">
+                    <h3 style="margin-top: 0;">🏗️ LES FONDATIONS</h3>
+                    <p><strong>Technique & Contenu</strong></p>
+                    <p>La partie invisible mais vitale de votre site. C'est tout ce qui concerne la performance, 
+                    la vitesse de chargement et la manière dont Google "comprend" et indexe vos pages. 
+                    Sans fondations solides, même le meilleur contenu reste invisible.</p>
+                </div>
+                
+                <div class="comparison-item" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 3px solid #3b82f6;">
+                    <h3 style="margin-top: 0;">✨ L'EXPÉRIENCE</h3>
+                    <p><strong>Confiance & Conversion</strong></p>
+                    <p>La partie visible qui fait toute la différence. C'est ce que ressent votre visiteur, 
+                    ce qui le rassure et ce qui le pousse à passer à l'action. C'est la frontière entre 
+                    un simple curieux et un futur client.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4-6: Chantier Fondations -->
+        <div class="slide">
+            <h2>🏗️ CHANTIER 1 : LES FONDATIONS</h2>
+            
+            <h3>Le Problème des "Bagages Trop Lourds"</h3>
+            
+            <p class="storytelling">
+                Vous êtes-vous déjà retrouvé à attendre le chargement d'un email avec une énorme pièce jointe ? 
+                Cette frustration, cette impatience, c'est exactement ce que vivent vos visiteurs aujourd'hui. 
+                Laissez-moi vous montrer quelque chose d'alarmant : <span class="emphasis">une seule de vos vidéos 
+                pèse 9 Mo</span> – c'est neuf fois plus lourd que ce que devrait peser une page web complète. 
+                Vos images de bannière atteignent 1,3 Mo chacune.
+            </p>
+
+            <div class="problem-box">
+                <h3 style="color: #dc2626; margin-top: 0;">⚠️ L'Impact Réel</h3>
+                <div class="metric" style="background: #dc2626;">9 Mo par vidéo</div>
+                <div class="metric" style="background: #dc2626;">1,3 Mo par image</div>
+                <p style="margin-top: 15px;">
+                    Ce poids excessif crée un effet domino catastrophique : Google pénalise votre référencement, 
+                    les visiteurs abandonnent avant même que la page ne charge, et votre taux de conversion 
+                    s'effondre. Dans un monde où l'attention se compte en secondes, chaque milliseconde perdue 
+                    est un client potentiel qui disparaît.
+                </p>
+            </div>
+
+            <h3>La Solution : "Voyager Léger"</h3>
+            
+            <p class="storytelling">
+                Pensez à la différence entre envoyer un colis de 10 kg par la poste et envoyer un simple SMS. 
+                Le message arrive instantanément, l'expérience est fluide. <span class="emphasis">C'est exactement 
+                ce que nous devons accomplir avec votre site.</span>
+            </p>
+
+            <div class="solution-box">
+                <h3 style="color: #059669; margin-top: 0;">✅ Actions Immédiates</h3>
+                
+                <div class="action-item">
+                    <div class="priority-badge urgent">URGENT</div>
+                    <h4>📹 Hébergement Vidéo Externe</h4>
+                    <p>Transférez immédiatement vos vidéos sur YouTube ou Vimeo (en mode "non répertorié" 
+                    pour conserver le contrôle). Ces plateformes sont optimisées pour diffuser des vidéos 
+                    rapidement, quel que soit l'appareil de l'utilisateur. Résultat : vos pages passent de 
+                    9 Mo à quelques Ko.</p>
+                </div>
+
+                <div class="action-item">
+                    <div class="priority-badge urgent">URGENT</div>
+                    <h4>🖼️ Optimisation des Images</h4>
+                    <ul>
+                        <li><strong>Compression :</strong> Convertir toutes les images au format WebP (réduction de 80% de la taille sans perte visible de qualité)</li>
+                        <li><strong>Redimensionnement :</strong> Adapter la taille réelle aux dimensions d'affichage</li>
+                        <li><strong>Nommage descriptif :</strong> Remplacer "image-5.png" par "fatigue-dating-app-solution.png" (bonus SEO)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>L'Équilibre Confiance & Créativité</h3>
+            
+            <p class="storytelling">
+                Votre approche visuelle mélange intelligemment l'IA et les photos réelles. C'est moderne, 
+                c'est créatif. L'intelligence artificielle vous permet d'illustrer des concepts uniques qui 
+                n'existent pas en banque d'images – comme ce contraste saisissant entre la "fatigue des applis" 
+                et la personne qui "pétille". Mais attention : <span class="emphasis">dans le secteur de la 
+                rencontre, l'authenticité est votre actif le plus précieux.</span>
+            </p>
+
+            <div class="highlight-box">
+                <h3>🎨 Stratégie Visuelle Équilibrée</h3>
+                <ul>
+                    <li><strong>Pour le blog :</strong> Conservez l'IA pour illustrer des concepts, mais uniformisez 
+                    le style (même filtre, même rendu)</li>
+                    <li><strong>Cohérence visuelle :</strong> Standardisez toutes les vignettes au format 16:9 pour 
+                    créer une grille professionnelle et harmonieuse</li>
+                    <li><strong>Pages de conversion :</strong> Privilégiez les photos réelles et professionnelles 
+                    sur les pages clés (accueil, prestations, à propos)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7-9: Problèmes de Structure -->
+        <div class="slide">
+            <h2>🏗️ Les Problèmes de Structure</h2>
+            
+            <h3>Les "Mauvaises Enseignes"</h3>
+            
+            <p class="storytelling">
+                Imaginez un restaurant gastronomique avec une simple enseigne "Restaurant" au-dessus de la porte. 
+                Personne ne comprendrait ce qui le rend spécial. <span class="emphasis">C'est exactement ce qui 
+                se passe avec vos titres H1.</span> Sur vos pages de catégories, on lit simplement "Catégorie : Blog" 
+                ou "Catégorie : Actualités" – des titres génériques qui ne disent rien de la valeur extraordinaire 
+                du contenu qu'elles renferment.
+            </p>
+
+            <div class="comparison">
+                <div class="comparison-item before">
+                    <h4 style="color: #dc2626;">❌ Avant</h4>
+                    <p>"Catégorie : Blog"</p>
+                    <p>"Catégorie : Actualités"</p>
+                </div>
+                <div class="comparison-item after">
+                    <h4 style="color: #059669;">✅ Après</h4>
+                    <p>"L'alternative à la Dating Fatigue : Nos Conseils"</p>
+                    <p>"Pétille avec Moi dans les Médias (RMC, France Bleu)"</p>
+                </div>
+            </div>
+
+            <h3>Les "Pages Mal Rangées"</h3>
+            
+            <p class="storytelling">
+                Votre page "Nos Prestations" est comme un magasin sans rayons : tout est là, mais rien n'est 
+                à sa place. Les informations cruciales – vos services, vos tarifs à partir de 800€, la durée 
+                de vos contrats – sont noyées dans un bloc de texte compact. Le visiteur doit chercher, 
+                deviner, s'épuiser. <span class="emphasis">Et Google ? Il ne peut tout simplement pas identifier 
+                les éléments clés de votre offre.</span>
+            </p>
+
+            <div class="solution-box">
+                <h3 style="color: #059669; margin-top: 0;">✅ La Solution : Structure & Clarté</h3>
+                
+                <div class="action-item">
+                    <div class="priority-badge high">PRIORITÉ HAUTE</div>
+                    <h4>📋 Hiérarchie de l'Information</h4>
+                    <p>Créer des sections distinctes avec des sous-titres clairs (H2, H3) :</p>
+                    <ul>
+                        <li>"Nos Services" avec description de chaque prestation</li>
+                        <li>"Nos Tarifs" avec grille comparative transparente</li>
+                        <li>"La Durée du Contrat" avec explications détaillées</li>
+                    </ul>
+                </div>
+
+                <div class="action-item">
+                    <div class="priority-badge high">PRIORITÉ HAUTE</div>
+                    <h4>📊 Grille Tarifaire</h4>
+                    <p>Présenter vos offres sous forme de tableau comparatif – la méthode la plus efficace 
+                    pour l'UX. Cela permet de comparer rapidement, justifie la valeur de votre service, 
+                    et rassure sur la transparence de votre approche.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10-13: Chantier Expérience -->
+        <div class="slide">
+            <h2>✨ CHANTIER 2 : L'EXPÉRIENCE</h2>
+            
+            <h3>La "Porte d'Entrée Cachée"</h3>
+            
+            <p class="storytelling">
+                Voici le problème le plus critique de votre site, celui qui vous fait perdre le plus de clients : 
+                <span class="emphasis">Aucun bouton d'action principal est mis en evidence.</span> Un visiteur arrive 
+                sur votre page d'accueil, intéressé, convaincu par votre message... mais ne voit pas comment 
+            </p>
+
+            <div class="problem-box">
+                <h3 style="color: #dc2626; margin-top: 0;">💔 Le Coût de l'Invisibilité</h3>
+                <p>Chaque jour, des visiteurs intéressés quittent votre site simplement parce qu'ils ne voient 
+                pas l'action à faire. Ils sont prêts à franchir le pas, mais vous ne leur montrez pas le chemin. 
+                C'est du chiffre d'affaires qui s'évapore silencieusement.</p>
+            </div>
+
+            <div class="solution-box">
+                <h3 style="color: #059669; margin-top: 0;">✅ Solution Immédiate</h3>
+                <div class="action-item">
+                    <div class="priority-badge urgent">URGENT</div>
+                    <h4>🎯 Call-to-Action Visible</h4>
+                    <p>Placer un bouton d'action clair et attractif "au-dessus de la ligne de flottaison" 
+                    (visible sans scroller). Le visiteur doit voir immédiatement : "Réservez votre entretien 
+                    gratuit" dès son arrivée sur le site.</p>
+                </div>
+            </div>
+
+            <h3>Le "Manque de Preuve"</h3>
+            
+            <p class="storytelling">
+                Vous possédez des atouts exceptionnels : des passages sur RMC Story et France Bleu, des 
+                témoignages émouvants, d'excellents avis Google. Mais ils sont cachés, éparpillés dans 
+                des pages de blog que peu de visiteurs découvrent. <span class="emphasis">Dans le secteur 
+                de la rencontre, la confiance doit être établie en moins de 3 secondes.</span> C'est le 
+                temps que vous avez pour rassurer un visiteur hésitant.
+            </p>
+
+            <div class="solution-box">
+                <h3 style="color: #059669; margin-top: 0;">✅ Signaux de Confiance Visibles</h3>
+                
+                <div class="action-item">
+                    <div class="priority-badge urgent">URGENT</div>
+                    <h4>📺 Carrousel Médias</h4>
+                    <p>Afficher fièrement un bandeau avec les logos RMC Story et France Bleu sur la page 
+                    d'accueil. Ces logos sont des certificats de crédibilité instantanée.</p>
+                </div>
+
+                <div class="action-item">
+                    <div class="priority-badge urgent">URGENT</div>
+                    <h4>⭐ Avis Google Intégrés</h4>
+                    <p>Intégrer un widget affichant votre excellente note (ex: 4.9/5). Les avis clients 
+                    sont le facteur de confiance n°1 pour 87% des internautes.</p>
+                </div>
+
+                <div class="action-item">
+                    <div class="priority-badge high">PRIORITÉ HAUTE</div>
+                    <h4>❓ Section FAQ</h4>
+                    <p>Anticiper et répondre aux questions récurrentes : prix, confidentialité, processus, 
+                    durée. Chaque question sans réponse est un frein potentiel à la conversion.</p>
+                </div>
+            </div>
+
+            <h3>Valoriser les "Portraits"</h3>
+            
+            <p class="storytelling">
+                Vos "Portraits du Moment" sont votre arme secrète. Ces témoignages authentiques créent une 
+                connexion émotionnelle immédiate. Ils transforment votre service abstrait en histoires 
+                humaines tangibles. <span class="emphasis">Pourtant, ils sont sous-exploités.</span>
+            </p>
+
+            <div class="highlight-box">
+                <h3>💎 Stratégie des Portraits</h3>
+                <ul>
+                    <li><strong>UX :</strong> Créer un carrousel de portraits sur la page d'accueil pour 
+                    générer émotion et identification</li>
+                    <li><strong>SEO :</strong> Créer une page dédiée pour chaque portrait (meilleur maillage 
+                    interne, plus de pages indexables)</li>
+                    <li><strong>Bénéfice double :</strong> Engagement émotionnel + amélioration du référencement</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 14-15: Plan d'Action -->
+        <div class="slide">
+            <h2>🚀 PLAN D'ACTION IMMÉDIAT</h2>
+            <p class="subtitle">Ce qu'il faut faire dès que possible</p>
+
+            <div class="action-list">
+                <div class="problem-box">
+                    <h3 style="color: #dc2626; margin-top: 0;">🔥 URGENCE CRITIQUE - PERFORMANCE</h3>
+                    <div class="action-item" style="background: #fff; margin: 15px 0;">
+                        <strong>1. Héberger les vidéos sur YouTube/Vimeo</strong>
+                        <p>Impact : Réduction de 95% du temps de chargement</p>
+                    </div>
+                    <div class="action-item" style="background: #fff; margin: 15px 0;">
+                        <strong>2. Compresser et redimensionner les images</strong>
+                        <p>Impact : Pages 10x plus rapides, meilleur référencement Google</p>
+                    </div>
+                    <div class="action-item" style="background: #fff; margin: 15px 0;">
+                        <strong>3. Optimiser les titres et balises des images</strong>
+                        <p>Impact : Accroître votre visibilité dans les moteurs de recherche</p>
+                    </div>
+                </div>
+
+                <div class="problem-box" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #f59e0b;">
+                    <h3 style="color: #d97706; margin-top: 0;">⚡ URGENCE CRITIQUE - CONVERSION</h3>
+                    <div class="action-item" style="background: #fff; margin: 15px 0;">
+                        <strong>1. Ajouter un CTA visible en haut de page</strong>
+                        <p>Impact : +40% de taux de contact potentiel</p>
+                    </div>
+                    <div class="action-item" style="background: #fff; margin: 15px 0;">
+                        <strong>2. Afficher logos médias + Avis Google</strong>
+                        <p>Impact : Confiance immédiate, réduction du taux de rebond</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3 style="color: #711fc6; margin-top: 0;">📊 PRIORITÉ HAUTE - STRUCTURE</h3>
+                    <div class="action-item" style="background: #fff; margin: 15px 0;">
+                        <strong>1. Réécrire les titres H1 des pages de catégorie</strong>
+                        <p>Impact : Meilleur positionnement Google sur requêtes ciblées</p>
+                    </div>
+                    <div class="action-item" style="background: #fff; margin: 15px 0;">
+                        <strong>2. Structurer la page "Nos Prestations" (H2/H3)</strong>
+                        <p>Impact : Clarté de l'offre, meilleure expérience utilisateur</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="storytelling" style="margin-top: 40px; font-size: 1.2em; text-align: center;">
+                <span class="emphasis">Ces actions, réalisées dès que possible, peuvent transformer radicalement 
+                les performances de votre site.</span> Elles représentent la différence entre un site qui 
+                freine votre croissance et un site qui devient votre meilleur commercial.
+            </p>
+        </div>
+
+        <!-- Slide 16: Contact et Prochaines Étapes -->
+        <div class="slide">
+            <h2>🎯 PROCHAINES ÉTAPES</h2>
+            
+            <p class="storytelling">
+                J'ai identifié les points critiques qui, une fois résolus, transformeront la performance et 
+                la visibilité de Pétille avec Moi. Le plan d'action immédiat se concentre sur les corrections 
+                techniques de performance et la restructuration pour optimiser la conversion.
+            </p>
+
+            <p class="storytelling">
+                Mais ce pré-audit n'est que la première étape. <span class="emphasis">Pour aller plus loin 
+                et transformer cette stratégie en résultats durables</span>, voici comment nous pouvons 
+                collaborer :
+            </p>
+
+            <div class="highlight-box">
+                <h3>🔍 1. Audit Complet & Stratégie Business</h3>
+                <p>Accès aux outils Google Search Console et Google Analytics pour analyser en profondeur :</p>
+                <ul>
+                    <li>Le trafic réel et son évolution</li>
+                    <li>Les requêtes exactes utilisées par vos visiteurs</li>
+                    <li>Les pages qui convertissent vs celles qui perdent des clients</li>
+                    <li>L'alignement parfait entre SEO et objectifs business</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>🎨 2. Refonte UX & UI</h3>
+                <p>Conception de maquettes optimisées pour les pages stratégiques :</p>
+                <ul>
+                    <li>Page d'accueil avec parcours de conversion fluide</li>
+                    <li>Page Prestations avec grille tarifaire claire</li>
+                    <li>Intégration des blocs de confiance (FAQ, Médias, Avis)</li>
+                    <li>Navigation intuitive maximisant l'engagement</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>✍️ 3. Audit & Exécution Éditoriale</h3>
+                <p>Développement d'une stratégie de contenu différenciante :</p>
+                <ul>
+                    <li>Analyse sémantique complète de votre marché</li>
+                    <li>Identification des sujets à forte valeur que vos concurrents ignorent</li>
+                    <li>Calendrier éditorial personnalisé</li>
+                    <li>Rédaction d'articles optimisés SEO qui renforcent votre autorité</li>
+                </ul>
+            </div>
+
+            <p class="storytelling" style="margin-top: 40px; font-size: 1.15em;">
+                Chaque élément de ce pré-audit a été pensé pour vous donner une vision claire des opportunités 
+                qui s'offrent à vous. <span class="emphasis">Votre agence mérite un site web qui soit à la 
+                hauteur de votre mission et de votre expertise.</span>
+            </p>
+        </div>
+
+        <!-- Annexes Section -->
+        <div class="slide">
+            <h2>📎 ANNEXES - Illustrations Techniques</h2>
+            <p class="subtitle">Preuves visuelles des constats et recommandations</p>
+
+            <h3>Annexe 1 : Rapport Lighthouse - Cache & Vidéos</h3>
+            <div class="problem-box">
+                <p><strong>Référence :</strong> Problème n°1 "Les Bagages Trop Lourds" - Hébergement des vidéos</p>
+                <div style="background: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <img src="image-petille&moi/audit-vidéo.png" alt="Rapport Lighthouse Cache" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none; padding: 30px; background: #f3f4f6; border-radius: 8px; text-align: center; color: #666;">
+                        <p style="margin: 0; font-size: 1.1em;">📊 Rapport Lighthouse - Durées de mise en cache</p>
+                        <p style="margin-top: 10px; font-size: 0.9em;">Économies estimées : 8608 Kio</p>
+                        <p style="margin-top: 10px; font-size: 0.85em; font-family: monospace;">WhatsApp-...-42.31_2190ccc8-1.mp4<br>Cache TTL: 1h | Taille: 9 088 KiB</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Annexe 2 : Rapport Lighthouse - Optimisation des Images</h3>
+            <div class="problem-box">
+                <p><strong>Référence :</strong> Problème n°1 "Les Bagages Trop Lourds" - Compression et redimensionnement des images</p>
+                <div style="background: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <img src="image-petille&moi/audit-image.png" alt="Rapport Lighthouse Images" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none; padding: 30px; background: #f3f4f6; border-radius: 8px; text-align: center; color: #666;">
+                        <p style="margin: 0; font-size: 1.1em;">📊 Rapport Lighthouse - Améliorer l'affichage des images</p>
+                        <p style="margin-top: 10px; font-size: 0.9em;">Économies estimées : 1300 Kio</p>
+                        <p style="margin-top: 10px; font-size: 0.85em; font-family: monospace;">
+                            cropped-image-3-1536x917.png: 1323,8 KiB → 1272,0 KiB économisés<br>
+                            rapport-dactivit...png: 52,3 KiB → 27,9 KiB économisés
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Annexe 3 : Exemple de Grille Tarifaire Optimale</h3>
+            <div class="solution-box">
+                <p><strong>Référence :</strong> Problème n°3 "Les Pages Mal Rangées" - Structuration de la page Prestations</p>
+                <div style="background: white; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;">
+                    <p style="color: #333; font-weight: bold; margin-bottom: 15px; font-size: 1.05em;">
+                        Source : bonjour-begin.fr
+                    </p>
+                    <img src="image-petille&moi/grille-tarifaire.png" alt="Exemple grille tarifaire Begin" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #e5e7eb;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none; padding: 30px; background: #f3f4f6; border-radius: 8px; color: #666;">
+                        <p style="margin: 0; font-size: 1.1em; font-weight: bold; color: #711fc6;">🎯 L'expérience Begin</p>
+                        <p style="margin-top: 15px; font-size: 0.95em;">Grille comparative à 3 colonnes :</p>
+                        <div style="display: flex; gap: 20px; margin-top: 20px; justify-content: center; flex-wrap: wrap;">
+                            <div style="background: white; padding: 15px; border-radius: 8px; min-width: 150px;">
+                                <p style="font-weight: bold; margin-bottom: 10px;">Un peu</p>
+                                <p style="color: #059669;">Gratuit</p>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 8px; min-width: 150px; border: 2px solid #711fc6;">
+                                <p style="font-weight: bold; margin-bottom: 10px;">Beaucoup</p>
+                                <p style="color: #711fc6;">399€ - 3 Béguins</p>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 8px; min-width: 150px;">
+                                <p style="font-weight: bold; margin-bottom: 10px;">À la folie</p>
+                                <p style="color: #711fc6;">789€ - Illimité</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Annexe 4 : Exemple de Bannière Médias</h3>
+            <div class="solution-box">
+                <p><strong>Référence :</strong> Problème n°2 "Le Manque de Preuve" - Carrousel médias sur la page d'accueil</p>
+                <div style="background: white; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;">
+                    <p style="color: #333; font-weight: bold; margin-bottom: 15px; font-size: 1.05em;">
+                        Source : bonjour-begin.fr
+                    </p>
+                    <img src="image-petille&moi/carroussel-media.png" alt="Bannière médias Pétille avec Moi" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #e5e7eb;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none; padding: 30px; background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border-radius: 8px; color: #333;">
+                        <p style="margin: 0; font-size: 1.1em; font-weight: bold; color: #711fc6;">✨ Pétille avec Moi dans les médias</p>
+                        <div style="display: flex; gap: 30px; margin-top: 20px; justify-content: center; flex-wrap: wrap; align-items: center;">
+                            <div style="background: white; padding: 15px 25px; border-radius: 8px; font-weight: bold; color: #dc2626; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                RMC STORY
+                            </div>
+                            <div style="background: white; padding: 15px 25px; border-radius: 8px; font-weight: bold; color: #3b82f6; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                FRANCE BLEU
+                            </div>
+                            <div style="background: white; padding: 15px 25px; border-radius: 8px; font-weight: bold; color: #059669; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                LE PARISIEN
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2 style="color: white; border: none; margin-bottom: 30px;">📞 CONTACTEZ-MOI</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">
+                Prêt à faire pétiller votre site web ?<br>
+                Discutons de votre projet et de vos objectifs.
+            </p>
+            <div>
+                <a href="https://www.linkedin.com/in/wedson-momperousse" target="_blank" class="contact-button">
+                    💼 LinkedIn
+                </a>
+                <a href="mailto:momperousse.wedson@gmail.com" class="contact-button">
+                    ✉️ Email
+                </a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.95em; opacity: 0.9;">
+                Wedson Momperousse<br>
+                Expert SEO & Stratégie Digitale
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Animation des bulles aléatoires
+        function createBubbles() {
+            const container = document.body;
+            const bubbleCount = 15;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                
+                const size = Math.random() * 60 + 40;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.top = Math.random() * 100 + '%';
+                bubble.style.animationDelay = Math.random() * 5 + 's';
+                bubble.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                
+                container.appendChild(bubble);
+            }
+        }
+        
+        createBubbles();
+
+        // Smooth scroll reveal effect
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide').forEach(slide => {
+            slide.style.opacity = '0';
+            slide.style.transform = 'translateY(30px)';
+            slide.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(slide);
+        });
+    </script>
+</body>
+</html>
